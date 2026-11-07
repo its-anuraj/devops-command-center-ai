@@ -218,19 +218,29 @@ flowchart TD
 
 ## Application Screenshots
 
-> *Screenshots below represent key operational views of the application. Placeholders will be replaced with production UI captures.*
+### 1. Operational Command Center Overview
+![DevOps Command Center Dashboard](docs/screenshots/dashboard.png)
+*Centralized operational dashboard showing real-time agent status, active approvals, live Switch event stream, and telemetry velocity metrics.*
 
-| Dashboard Overview | AI Agent Fleet |
-|---|---|
-| ![Dashboard Overview](docs/screenshots/dashboard.png)<br>*(Screenshot placeholder — pending capture)* | ![AI Agent Fleet](docs/screenshots/agents.png)<br>*(Screenshot placeholder — pending capture)* |
+### 2. AI Agent Fleet & Deep Inspection
+![AI Agent Fleet](docs/screenshots/agents.png)
+*Live registry of connected Switch agents showing handles, connection models, and modal inspection of granted diagnostic tools.*
 
-| Incident War-Room | Human Approvals |
-|---|---|
-| ![Incident War-Room](docs/screenshots/war-room.png)<br>*(Screenshot placeholder — pending capture)* | ![Human Approvals](docs/screenshots/approvals.png)<br>*(Screenshot placeholder — pending capture)* |
+### 3. Incident War-Room Collaboration
+![Incident War-Room Collaboration](docs/screenshots/war-room.png)
+*Real-time Switch collaboration channel featuring historical room messages, interactive prompt dispatch, and live agent turn streaming.*
 
-| Autonomous Workflows | Live Event Stream |
-|---|---|
-| ![Autonomous Workflows](docs/screenshots/workflows.png)<br>*(Screenshot placeholder — pending capture)* | ![Live Event Stream](docs/screenshots/logs.png)<br>*(Screenshot placeholder — pending capture)* |
+### 4. Human-in-the-Loop Action Approvals
+![Human-in-the-Loop Approvals](docs/screenshots/approvals.png)
+*Security approval gate displaying pending operational requests, risk classification, and audit history to prevent unauthorized destructive actions.*
+
+### 5. Autonomous Workflow Remediation Pipeline
+![Autonomous Workflow Pipelines](docs/screenshots/workflows.png)
+*Multi-stage remediation pipeline tracking alert triage through to post-mortem archival, with explicit human authorization enforcement at Stage 6.*
+
+### 6. Switch Agent Events Live Stream
+![Switch Agent Events Live Stream](docs/screenshots/live-logs.png)
+*High-throughput Server-Sent Events (SSE) telemetry inspector with real-time level filtering, search, and session trace correlation.*
 
 ---
 
@@ -361,6 +371,8 @@ The project directory tree represents the actual repository contents:
 devops-command-center-ai/
 ├── README.md                      # Root documentation & architecture guide
 ├── .gitignore                     # Git ignore rules for node_modules, dist, .env
+├── docs/                          # Project documentation assets
+│   └── screenshots/               # Application UI screenshots
 └── frontend/                      # React 19 + TypeScript frontend application
     ├── .env.example               # Safe environment variable configuration template
     ├── package.json               # Dependencies, scripts, and build metadata
