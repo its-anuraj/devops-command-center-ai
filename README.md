@@ -2,7 +2,7 @@
 
 > **One Command Center. Intelligent Agents. Human-Controlled DevOps.**
 
-A centralized, production-grade operational command center for AI-powered multi-agent incident management. DevOps Command Center AI bridges engineering teams and autonomous AI agents through real-time telemetry, live war-room collaboration, and non-negotiable human-in-the-loop approval workflows powered by the Switch Gateway.
+A centralized operational dashboard and command center for AI-powered multi-agent incident management. DevOps Command Center AI bridges engineering teams and autonomous AI agents through real-time telemetry, live war-room collaboration, and human-in-the-loop approval workflows integrated with the Switch Gateway.
 
 [![React](https://img.shields.io/badge/React-19.3-61DAFB?logo=react&logoColor=black)](https://react.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-7.0-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -20,19 +20,19 @@ A centralized, production-grade operational command center for AI-powered multi-
 
 ## The Problem
 
-Modern software engineering teams are rapidly adopting autonomous AI agents and language model tooling to diagnose bugs, query databases, and automate deployments. However, orchestrating these agents in mission-critical production environments presents severe operational challenges:
+Modern software engineering teams are rapidly adopting autonomous AI agents and language model tooling to diagnose bugs, query databases, and automate deployments. However, orchestrating these agents in operational environments presents severe challenges:
 
-1. **Fragmented Agent Visibility**: Autonomous scripts, LLM tools, and subagents run in isolated terminals or hidden worker queues. Operations engineers have no unified window to inspect active agents, granted tools, connection models, or execution state.
+1. **Fragmented Agent Visibility**: Autonomous scripts, LLM tools, and subagents run in isolated terminals or background processes. Operations engineers lack a unified interface to inspect active agents, granted tools, connection models, or execution state.
 2. **Lack of Centralized Telemetry**: When an agent investigates an issue or runs commands, telemetry is scattered across raw terminal stdout, local logs, and fragmented chat threads. SRE teams cannot reconstruct what an agent did, why it did it, or what steps failed.
 3. **Delayed Incident Resolution**: Triaging production outages requires context-switching across monitoring dashboards, cloud consoles, incident channels, and CI/CD portals. Correlating errors with agent investigations is manual, slow, and error-prone.
 4. **Poor Human-Agent Collaboration**: AI agents often operate as disconnected black boxes rather than active participants in engineering war rooms. Engineers cannot easily query agents, redirect investigations, or receive real-time reasoning updates inside an incident room.
-5. **Uncontrolled Autonomous Actions**: Granting autonomous agents the authority to execute destructive shell commands, trigger rollbacks, or modify infrastructure without human oversight introduces unacceptable risk of catastrophic outages or data loss.
+5. **Uncontrolled Autonomous Actions**: Granting autonomous agents the authority to execute destructive shell commands, trigger rollbacks, or modify infrastructure without human oversight introduces unacceptable operational risk.
 
 ---
 
 ## Our Solution
 
-**DevOps Command Center AI** solves these challenges by providing a single, highly refined command surface that unites human operators and autonomous agents under strict operational control.
+**DevOps Command Center AI** addresses these challenges by providing a single, unified operational surface that connects human operators and autonomous agents under human oversight.
 
 ```
                     ┌───────────────────────────────────┐
@@ -48,11 +48,11 @@ Modern software engineering teams are rapidly adopting autonomous AI agents and 
 └──────────────────┘        └──────────────────┘        └──────────────────┘
 ```
 
-- **Unified Agent Fleet Management**: Directly inspects the Switch Gateway registry to discover connected agents (e.g. `@devops-investigator` via Antigravity CLI), their granted tools, addressing policies, and execution statuses.
+- **Unified Agent Fleet Management**: Inspects the Switch Gateway registry to discover connected agents (e.g. `@devops-investigator` via Antigravity CLI), their granted tools, addressing policies, and execution statuses.
 - **Persistent Dual-Stream SSE Telemetry**: Subscribes directly to Switch Gateway activity and chat event streams, rendering real-time turns, tool invocations, and system messages across all views without polling.
 - **Interactive Incident War-Rooms**: Connects engineering operators directly to Switch chat channels, enabling live instruction dispatch, real-time agent turn streaming, and collaborative incident triage.
-- **Non-Negotiable Human-in-the-Loop Safeguards**: Traps sensitive or risky remediation actions behind explicit operator approval gates. Proposed remediation commands are never marked as executed without verified backend sign-off.
-- **Radical Data Honesty**: Strictly distinguishes genuine Switch Gateway backend data from demonstration scenario walkthroughs, ensuring zero confusion between real telemetry and simulated outage demonstrations.
+- **Human-in-the-Loop Safeguards**: Routes sensitive or risky remediation actions through an operator approval interface. Proposed remediation commands are never marked as executed without verified backend sign-off.
+- **Data Honesty**: Strictly distinguishes genuine Switch Gateway backend data from demonstration scenario walkthroughs, ensuring zero confusion between real telemetry and simulated outage demonstrations.
 
 ---
 
@@ -91,6 +91,7 @@ Modern software engineering teams are rapidly adopting autonomous AI agents and 
 - Live synchronization with `GET /gateway/agent-sessions/approvals`.
 - Real-time approval request cards displaying agent name, session ID, requested action, and risk classification.
 - Interactive **Authorize** (`accept`) and **Reject** (`decline`) decision dispatch calling `POST /gateway/agent-sessions/{agent_id}/{session_id}/approvals/{request_id}/answer`.
+- *Note on verification status*: The approval interface, UI cards, and API client bindings are implemented. However, live execution of the Accept and Reject actions has not yet been verified against an active request because the backend had zero open pending approvals during QA testing.
 - Honest empty state when zero approval requests are pending, verifying that connected agents are operating within pre-authorized parameters.
 
 ### 7. Dual-Mode Incident Triage & Root Cause Analysis
@@ -105,7 +106,7 @@ Modern software engineering teams are rapidly adopting autonomous AI agents and 
 ### 9. Switch Agent Events Live Stream
 - Dedicated real-time log inspector streaming genuine Switch agent turns, tool calls, and room events.
 - Client-side filtering by service, log level, event kind, and free-text search.
-- Stream control controls including Pause/Resume, Auto-scroll locking, and JSON export.
+- Stream controls including Pause/Resume, Auto-scroll locking, and JSON export.
 
 ### 10. Deployment Pipeline & Settings
 - Release history interface clearly labeled `DEMO DEPLOYMENTS` with rollback buttons strictly disabled to prevent simulated actions from claiming real infrastructure modifications.
@@ -120,7 +121,7 @@ Modern software engineering teams are rapidly adopting autonomous AI agents and 
 | **Backend Integration** | Hardcoded mock data or local JSON files | **Genuine Switch Gateway integration** via REST API and live SSE streams on port 18000. |
 | **Authentication** | Fake `localStorage` token or no auth | **HttpOnly cookie session authentication** validating against real backend users. |
 | **Agent Telemetry** | Fabricated timer increments | **Real event streaming** consuming live activity and chat streams. |
-| **Human Oversight** | Decorative "Approve" button with fake alerts | **Cryptographic approval dispatch** posting decisions directly to agent sessions. |
+| **Human Oversight** | Decorative "Approve" button with fake alerts | **Backend approval decision dispatch** posting decisions directly to agent sessions via Switch Gateway. |
 | **Data Integrity** | Claims to manage real Kubernetes clusters | **Radically honest**: simulated scenarios are explicitly labeled `DEMO`; real backend data is uncompromised. |
 | **Design Standard** | Generic Bootstrap/Material admin template | **Tailored dark command center** inspired by Linear, Vercel, and Grafana. |
 
@@ -217,19 +218,19 @@ flowchart TD
 
 ## Application Screenshots
 
-> *Screenshots below represent key operational views of the application. High-resolution captures can be added to `docs/screenshots/`.*
+> *Screenshots below represent key operational views of the application. Placeholders will be replaced with production UI captures.*
 
 | Dashboard Overview | AI Agent Fleet |
 |---|---|
-| ![Dashboard Overview](docs/screenshots/dashboard.png)<br>*(Placeholder — pending capture)* | ![AI Agent Fleet](docs/screenshots/agents.png)<br>*(Placeholder — pending capture)* |
+| ![Dashboard Overview](docs/screenshots/dashboard.png)<br>*(Screenshot placeholder — pending capture)* | ![AI Agent Fleet](docs/screenshots/agents.png)<br>*(Screenshot placeholder — pending capture)* |
 
 | Incident War-Room | Human Approvals |
 |---|---|
-| ![Incident War-Room](docs/screenshots/war-room.png)<br>*(Placeholder — pending capture)* | ![Human Approvals](docs/screenshots/approvals.png)<br>*(Placeholder — pending capture)* |
+| ![Incident War-Room](docs/screenshots/war-room.png)<br>*(Screenshot placeholder — pending capture)* | ![Human Approvals](docs/screenshots/approvals.png)<br>*(Screenshot placeholder — pending capture)* |
 
 | Autonomous Workflows | Live Event Stream |
 |---|---|
-| ![Autonomous Workflows](docs/screenshots/workflows.png)<br>*(Placeholder — pending capture)* | ![Live Event Stream](docs/screenshots/logs.png)<br>*(Placeholder — pending capture)* |
+| ![Autonomous Workflows](docs/screenshots/workflows.png)<br>*(Screenshot placeholder — pending capture)* | ![Live Event Stream](docs/screenshots/logs.png)<br>*(Screenshot placeholder — pending capture)* |
 
 ---
 
@@ -240,7 +241,7 @@ flowchart TD
 Ensure the following tools are installed on your machine:
 - **Node.js**: v18.0.0 or later (Node.js 20+ recommended)
 - **npm**: v9.0.0 or later
-- **Switch Gateway**: A running Switch instance on `http://127.0.0.1:18000` (see Backend Setup below).
+- **Switch Gateway**: A running Switch instance on `http://127.0.0.1:18000` (see Backend Verification below).
 
 ---
 
@@ -284,18 +285,29 @@ VITE_SWITCH_HEALTH_URL=/health
 
 ### Step 4: Verify the Switch Gateway Backend
 
-The Switch Gateway must be running and accessible on port `18000`. You can verify that the gateway is alive by running:
+The Switch Gateway must be running and accessible on port `18000`. You can verify backend readiness by running:
 
 ```bash
-curl -i http://127.0.0.1:18000/health
+curl -i http://127.0.0.1:18000/health/ready
 ```
 
-Expected response:
+Expected readiness response:
 ```json
-{"status":"healthy"}
+{
+  "status": "ready",
+  "checks": {
+    "database": {"healthy": true},
+    "message_listener": {"healthy": true},
+    "session_activity_listener": {"healthy": true},
+    "agent_event_listener": {"healthy": true},
+    "signal_bus": {"healthy": true}
+  }
+}
 ```
 
-And verify the authentication configuration endpoint:
+*(A basic liveness check is also available at `http://127.0.0.1:18000/health`, which returns `{"status":"ok"}`)*.
+
+Verify the authentication configuration endpoint:
 ```bash
 curl -i http://127.0.0.1:18000/gateway/auth/config
 ```
@@ -337,34 +349,38 @@ All frontend configuration is managed via environment variables documented in `f
 | Variable Name | Purpose | Default / Example | Required |
 |---|---|---|:---:|
 | `VITE_API_BASE_URL` | Base path for Switch Gateway REST requests routed through the Vite proxy. | `/gateway` | **Yes** |
-| `VITE_SWITCH_HEALTH_URL` | Endpoint path used to verify Switch Core root service health. | `/health` | No |
+| `VITE_SWITCH_HEALTH_URL` | Endpoint path used to verify Switch Core root service health and readiness. | `/health` (or `/health/ready`) | No |
 
 ---
 
 ## Project Structure
 
+The project directory tree represents the actual repository contents:
+
 ```
 devops-command-center-ai/
 ├── README.md                      # Root documentation & architecture guide
 ├── .gitignore                     # Git ignore rules for node_modules, dist, .env
-├── docs/                          # Architecture artifacts & screenshot directory
-│   └── screenshots/               # Application screenshot assets
 └── frontend/                      # React 19 + TypeScript frontend application
     ├── .env.example               # Safe environment variable configuration template
     ├── package.json               # Dependencies, scripts, and build metadata
-    ├── vite.config.ts             # Vite configuration & backend proxy routing (/gateway)
-    ├── tsconfig.json              # TypeScript strict compiler configuration
+    ├── vite.config.ts             # Vite configuration & backend proxy routing (/gateway, /health)
+    ├── tsconfig.json              # TypeScript project reference configuration
+    ├── tsconfig.app.json          # TypeScript application compiler options
+    ├── tsconfig.node.json         # TypeScript Node/Vite compiler options
     ├── index.html                 # Single-page application entry HTML
+    ├── public/                    # Static public assets (icons, favicons)
     └── src/
         ├── App.tsx                # Client routing & authentication boundary
         ├── main.tsx               # DOM bootstrap entry point
+        ├── index.css              # Global styles and Tailwind CSS imports
         ├── context/
-            │   ├── AuthContext.tsx    # Session validation, login, and logout state
-            │   └── AppContext.tsx     # Centralized SSE lifecycle & unified event store
+        │   ├── AuthContext.tsx    # Session validation, login, and logout state
+        │   └── AppContext.tsx     # Centralized SSE lifecycle & unified event store
         ├── services/
-            │   ├── apiClient.ts       # Axios instance with proxy base URL & credentials
-            │   ├── switchGateway.ts   # Strongly typed Switch Gateway API bindings
-            │   └── switchEventStream.ts # Dual-stream SSE consumer with stall watchdog
+        │   ├── apiClient.ts       # Axios instance with proxy base URL & credentials
+        │   ├── switchGateway.ts   # Strongly typed Switch Gateway API bindings
+        │   └── switchEventStream.ts # Dual-stream SSE consumer with stall watchdog
         ├── types/                 # TypeScript domain interfaces
         │   ├── agent.ts           # AI agent data models
         │   ├── approval.ts        # Human approval requests and decision contracts
@@ -392,6 +408,7 @@ devops-command-center-ai/
             ├── mockIncidents.ts
             ├── mockWorkflows.ts
             ├── mockDeployments.ts
+            ├── mockLogs.ts
             └── mockServices.ts
 ```
 
@@ -399,20 +416,20 @@ devops-command-center-ai/
 
 ## Security & Responsible AI
 
-DevOps Command Center AI implements strict operational safety principles to ensure that agentic AI serves as a powerful assistant without jeopardizing system integrity:
+DevOps Command Center AI implements operational safety principles to ensure that agentic AI serves as a powerful assistant under human control:
 
-- **HttpOnly Cookie Authentication**: Passwords and session tokens are never stored in client-accessible storage (`localStorage`, `sessionStorage`). Authentication utilizes browser-managed HttpOnly cookies (`switch_auth`), eliminating token exfiltration vulnerabilities.
+- **HttpOnly Cookie Authentication**: Passwords and session tokens are never stored in client-accessible storage (`localStorage`, `sessionStorage`). Authentication utilizes browser-managed HttpOnly cookies (`switch_auth`), reducing token exfiltration risks.
 - **Zero Secrets in Client Code**: The frontend codebase contains zero hardcoded API keys, database credentials, or private certificates.
-- **Mandatory Human-in-the-Loop Gates**: Actions that carry operational risk (such as rollbacks, pod termination, or schema updates) require explicit authorization through the Approvals interface before execution.
-- **Anti-Hallucination Execution Boundaries**: Proposed remediation plans are strictly prevented from reporting false success. An action is held in `PENDING` status until verified backend execution telemetry is received.
-- **Radical Data Transparency**: Simulated scenario assets are explicitly badged (`DEMO SCENARIOS`, `DEMO DATA`, `DEMO PIPELINE`), ensuring operators always know whether they are inspecting genuine live telemetry or an educational demonstration.
+- **Human-in-the-Loop Gates**: Actions requiring operational risk mitigation (such as rollbacks or modifying commands) are designed to route through the Approvals interface before execution. *(Live decision execution pending verification once an active approval request is generated)*.
+- **Execution Boundaries**: Proposed remediation plans are strictly prevented from reporting false success. An action is held in `PENDING` status until verified backend execution telemetry is received.
+- **Data Transparency**: Simulated scenario assets are explicitly badged (`DEMO SCENARIOS`, `DEMO DATA`, `DEMO PIPELINE`), ensuring operators always know whether they are inspecting genuine live telemetry or an educational demonstration.
 
 ---
 
 ## Current Limitations
 
 In the spirit of complete technical transparency:
-1. **Real Pending Approvals**: The Approvals page connects to the live Switch approval endpoint (`/gateway/agent-sessions/approvals`). During standard demo runs, this endpoint returns `[]` unless an active agent session is actively paused at a decision point.
+1. **Live Approval Decision Execution**: The Approvals page connects to the live Switch approval endpoint (`GET /gateway/agent-sessions/approvals`) and implements the decision answer endpoint (`POST /gateway/agent-sessions/{agent_id}/{session_id}/approvals/{request_id}/answer`). However, because the backend returned zero open pending approvals during testing (`[]`), live execution of the Accept and Reject actions has not yet been verified against an active request.
 2. **External CI/CD Webhooks**: Automated rollback execution from the Deployments interface is disabled because external CI/CD platforms (e.g. ArgoCD, GitHub Actions) are not connected to this local instance.
 3. **Cluster Metrics**: CPU and Memory velocity graphs and SLA metrics are simulated models designed to demonstrate UI telemetry integration, as raw Kubernetes metric server streams require dedicated cluster agents.
 4. **Third-Party Messaging Bridges**: Mattermost integration in Switch chat rooms depends on the active state of optional local Mattermost Docker containers.
