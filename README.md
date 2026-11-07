@@ -12,9 +12,15 @@ A centralized operational dashboard and command center for AI-powered multi-agen
 [![Server-Sent Events](https://img.shields.io/badge/SSE-Realtime_Stream-10B981?logo=rss&logoColor=white)](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events)
 [![Build Status](https://img.shields.io/badge/build-passing-brightgreen)](https://github.com/its-anuraj/devops-command-center-ai)
 
-**GitHub Repository**: [https://github.com/its-anuraj/devops-command-center-ai](https://github.com/its-anuraj/devops-command-center-ai)
+GitHub Repository: https://github.com/its-anuraj/devops-command-center-ai
 
-> 📹 **Walkthrough Video**: *Demonstration video pending upload.*
+## 🎥 Demo Video
+
+Watch the project demonstration:
+
+[▶ Watch DevOps Command Center AI – Demo Video](https://youtu.be/VT4aW0o_cmo)
+
+Demonstration video showcasing Switch Gateway integration, AI agents, incident management, live events, and human-in-the-loop workflows.
 
 ---
 
@@ -462,11 +468,11 @@ Planned enhancements for future development cycles:
 
 ## Hackathon Submission
 
-- **Project Name**: DevOps Command Center AI
-- **Repository**: [https://github.com/its-anuraj/devops-command-center-ai](https://github.com/its-anuraj/devops-command-center-ai)
-- **Author / Developer**: Anuraj Singh ([@its-anuraj](https://github.com/its-anuraj))
-- **Category**: AI-powered DevOps / Agentic AI / Developer Tools / Incident Management
-- **Video Walkthrough**: *Pending upload*
+Project Name: DevOps Command Center AI
+Repository: [GitHub Repository](https://github.com/its-anuraj/devops-command-center-ai)
+Author / Developer: Anuraj Singh ([@its-anuraj](https://github.com/its-anuraj))
+Category: AI-powered DevOps / Agentic AI / Developer Tools / Incident Management
+Demo Video: [Watch Demo](https://youtu.be/VT4aW0o_cmo)
 
 ---
 
